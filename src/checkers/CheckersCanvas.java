@@ -4,14 +4,19 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This canvas displays a 160-by-160 checkerboard pattern with
+ * This canvas displays a 160-by-160 checker board pattern with
  * a 2-pixel black border.  It is assumed that the size of the
  * canvas is set to exactly 164-by-164 pixels.  This class does
  * the work of letting the users play checkers, and it displays
- * the checkerboard
+ * the checker board
  */
 class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
 
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
    Button resignButton;   // Current player can resign by clicking this button.
    Button newGameButton;  // This button starts a new game.  It is enabled only
                           //     when the current game has ended.
@@ -98,7 +103,7 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
 
    void gameOver(String str) {
           // The game ends.  The parameter, str, is displayed as a message
-          // to the user.  The states of the buttons are adjusted so playes
+          // to the user.  The states of the buttons are adjusted so players
           // can start a new game.
       message.setText(str);
       newGameButton.setEnabled(true);
@@ -137,7 +142,7 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
           return;
       }
       
-      /* If the user clicked on a squre where the selected piece can be
+      /* If the user clicked on a square where the selected piece can be
          legally moved, then make the move and return. */
 
       for (int i = 0; i < legalMoves.length; i++)
@@ -189,6 +194,10 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
       
       if (currentPlayer == CheckersData.RED) {
          currentPlayer = CheckersData.BLACK;
+         //Computer always plays the black pieces... Use AI here.
+         
+         
+         
          legalMoves = board.getLegalMoves(currentPlayer);
          if (legalMoves == null)
             gameOver("BLACK has no moves.  RED wins.");
@@ -196,6 +205,10 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
             message.setText("BLACK:  Make your move.  You must jump.");
          else
             message.setText("BLACK:  Make your move.");
+         
+         
+         
+         
       }
       else {
          currentPlayer = CheckersData.RED;
@@ -246,8 +259,8 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
    
 
    public void paint(Graphics g) {
-        // Draw  checkerboard pattern in gray and lightGray.  Draw the
-        // checkers.  If a game is in progress, hilite the legal moves.
+        // Draw  checker board pattern in gray and lightGray.  Draw the
+        // checkers.  If a game is in progress, highlight the legal moves.
       
       /* Draw a two-pixel black border around the edges of the canvas. */
       
@@ -255,7 +268,7 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
       g.drawRect(0,0,getSize().width-1,getSize().height-1);
       g.drawRect(1,1,getSize().width-3,getSize().height-3);
       
-      /* Draw the squares of the checkerboard and the checkers. */
+      /* Draw the squares of the checker board and the checkers. */
       
       for (int row = 0; row < 8; row++) {
          for (int col = 0; col < 8; col++) {
@@ -289,7 +302,7 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
          }
       }
     
-      /* If a game is in progress, hilite the legal moves.   Note that legalMoves
+      /* If a game is in progress, highlight the legal moves.   Note that legalMoves
          is never null while a game is in progress. */      
       
       if (gameInProgress) {
@@ -300,7 +313,7 @@ class CheckersCanvas extends Canvas implements ActionListener, MouseListener {
          }
             // If a piece is selected for moving (i.e. if selectedRow >= 0), then
             // draw a 2-pixel white border around that piece and draw green borders 
-            // around eacj square that that piece can be moved to.
+            // around each square that that piece can be moved to.
          if (selectedRow >= 0) {
             g.setColor(Color.white);
             g.drawRect(2 + selectedCol*20, 2 + selectedRow*20, 19, 19);

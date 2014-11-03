@@ -17,6 +17,7 @@ class CheckersMove {
       toRow = r2;
       toCol = c2;
    }
+   
    boolean isJump() {
         // Test whether this move is a jump.  It is assumed that
         // the move is legal.  In a jump, the piece moves two
@@ -24,4 +25,3 @@ class CheckersMove {
       return (fromRow - toRow == 2 || fromRow - toRow == -2);
    }
 }  // end class CheckersMove.
-

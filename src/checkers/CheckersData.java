@@ -2,14 +2,13 @@ package checkers;
 
 import java.util.Vector;
 
+// An object of this class holds data about a game of checkers.
+// It knows what kind of piece is on each square of the checker board.
+// Note that RED moves "up" the board (i.e. row number decreases)
+// while BLACK moves "down" the board (i.e. row number increases).
+// Methods are provided to return lists of available legal moves.
 
 class CheckersData {
-
-      // An object of this class holds data about a game of checkers.
-      // It knows what kind of piece is on each square of the checkerboard.
-      // Note that RED moves "up" the board (i.e. row number decreases)
-      // while BLACK moves "down" the board (i.e. row number increases).
-      // Methods are provided to return lists of available legal moves.
       
    /*  The following constants represent the possible contents of a square
        on the board.  The constants RED and BLACK also represent players
@@ -116,7 +115,7 @@ class CheckersData {
       else
          playerKing = BLACK_KING;
 
-      Vector moves = new Vector();  // Moves will be stored in this vector.
+      Vector<CheckersMove> moves = new Vector<CheckersMove>();  // Moves will be stored in this vector.
       
       /*  First, check for any possible jumps.  Look at each square on the board.
           If that square contains one of the player's pieces, look at a possible
@@ -192,7 +191,7 @@ class CheckersData {
          playerKing = RED_KING;
       else
          playerKing = BLACK_KING;
-      Vector moves = new Vector();  // The legal jumps will be stored in this vector.
+      Vector<CheckersMove> moves = new Vector<CheckersMove>();  // The legal jumps will be stored in this vector.
       if (board[row][col] == player || board[row][col] == playerKing) {
          if (canJump(player, row, col, row+1, col+1, row+2, col+2))
             moves.addElement(new CheckersMove(row, col, row+2, col+2));
@@ -259,7 +258,7 @@ class CheckersData {
 
       if (player == RED) {
          if (board[r1][c1] == RED && r2 > r1)
-             return false;  // Regualr red piece can only move down.
+             return false;  // Regular red piece can only move down.
           return true;  // The move is legal.
       }
       else {
